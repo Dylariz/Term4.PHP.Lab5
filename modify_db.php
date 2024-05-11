@@ -21,7 +21,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     preg_match('/^[А-Я][а-я]+$/u', $lastname) &&
     preg_match('/^[А-Я][а-я]+$/u', $patronymic) &&
     preg_match('/^(\+7|8)[0-9]{10}$/', $phone) &&
-    preg_match('/^[А-Я][а-я0-9\s,]+$/u', $address)) {
+    preg_match('/^[А-Я][А-Яа-я0-9\s,\.\/-]+$/u', $address)) {
         if ($id) {
             $stmt = $db->prepare('REPLACE INTO "user" ("id", "firstname", "lastname", "patronymic", "phone", "address") VALUES (:id, :firstname, :lastname, :patronymic, :phone, :address)');
             $stmt->bindValue(':id', $id);
@@ -34,6 +34,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $stmt->bindValue(':phone', $phone);
         $stmt->bindValue(':address', $address);
         $stmt->execute();
+        echo 'Добавлен/изменен пользователь c ID - ' . $db->lastInsertRowID() . '.';
     } else {
         echo 'Некорректные данные.';
     }
