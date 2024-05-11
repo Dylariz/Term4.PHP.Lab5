@@ -23,9 +23,32 @@ if ($searchType && $searchTerm) {
 
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>Поиск</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th,
+        td {
+            border: 1px solid black;
+            padding: 10px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        td {
+            word-wrap: break-word;
+        }
+    </style>
 </head>
+
 <body>
     <form action="" method="post">
         <label for="searchType">Тип поиска:</label>
@@ -43,9 +66,21 @@ if ($searchType && $searchTerm) {
     <?php if ($searchType && $searchTerm): ?>
         <?php if (count($results) > 0): ?>
             <table>
-                <tr><th>Фамилия</th><th>Имя</th><th>Отчество</th><th>Телефон</th><th>Адрес</th></tr>
+                <tr>
+                    <th>Фамилия</th>
+                    <th>Имя</th>
+                    <th>Отчество</th>
+                    <th>Телефон</th>
+                    <th>Адрес</th>
+                </tr>
                 <?php foreach ($results as $row): ?>
-                    <tr><td><?= $row['lastname'] ?></td><td><?= $row['firstname'] ?></td><td><?= $row['patronymic'] ?></td><td><?= $row['phone'] ?></td><td><?= $row['address'] ?></td></tr>
+                    <tr>
+                        <td><?= $row['lastname'] ?></td>
+                        <td><?= $row['firstname'] ?></td>
+                        <td><?= $row['patronymic'] ?></td>
+                        <td><?= $row['phone'] ?></td>
+                        <td><?= $row['address'] ?></td>
+                    </tr>
                 <?php endforeach; ?>
             </table>
         <?php else: ?>
@@ -53,4 +88,5 @@ if ($searchType && $searchTerm) {
         <?php endif; ?>
     <?php endif; ?>
 </body>
+
 </html>
